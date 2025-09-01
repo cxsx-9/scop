@@ -20,6 +20,6 @@
 // #define WINDOW_WIDTH 800
 // #define WINDOW_HEIGHT 600
 
-struct Vertex{
-    float x, y, z, texX, texY, normalX, normalY, normalZ;
-};
+// struct Vertex{
+//     float x, y, z, texX, texY, normalX, normalY, normalZ;
+// };

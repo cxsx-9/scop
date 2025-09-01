@@ -11,20 +11,28 @@ public:
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 
-    void draw(const Model& meshModel, Shader& shader,
-              const glm::mat4& model,
+    void draw(const Model& model, Shader& shader,
+              const glm::mat4& modelMatrix,
               const glm::mat4& view,
-              const glm::mat4& proj,
-              const glm::vec3& viewPos)
+              const glm::mat4& proj)
     {
         shader.use();
-        shader.setMat4("model", model);
+        shader.setMat4("model", modelMatrix);
         shader.setMat4("view",  view);
         shader.setMat4("projection", proj);
-        shader.setVec3("viewPos", viewPos);
 
-        meshModel.bind();
-        glDrawElements(GL_TRIANGLES, meshModel.indexCount, GL_UNSIGNED_INT, 0); // with EBO
-        // glDrawArrays(GL_TRIANGLES, 0, object.Triangles.size()); // with out EBO
+        bool useTex = (model.material.diffuseMap != 0) && model.hasUV;
+        shader.setBool("useTexture", useTex);
+
+        if (useTex) {
+            glActiveTexture(GL_TEXTURE0);
+            glBindTexture(GL_TEXTURE_2D, model.material.diffuseMap);
+            shader.setInt("diffuseMap", 0);
+        } else {
+            shader.setVec3("baseColor", model.material.diffuseColor);
+        }
+
+        model.bind();
+        glDrawElements(GL_TRIANGLES, (GLsizei)model.indices.size(), GL_UNSIGNED_INT, 0);
     }
 };

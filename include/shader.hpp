@@ -12,6 +12,9 @@ class Shader {
         void setMat4(const std::string& name, const glm::mat4& m) const;
         void setVec3(const std::string& name, const glm::vec3& v) const;
         void setFloat(const std::string& name, float f) const;
+        
+        void setBool(const std::string &name, bool value) const;
+        void setInt(const std::string &name, int value) const;
 
     private:
         static std::string readFile(const char* path);

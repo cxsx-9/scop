@@ -1,5 +1,4 @@
 #include "scop.hpp"
-#include "objectLoader.hpp"
 #include "shader.hpp"
 #include "model.hpp"
 #include "camera.hpp"
@@ -27,9 +26,9 @@ GLFWwindow* createWindow(const std::string &name)
     window = glfwCreateWindow(gW, gH, name.c_str(), NULL, NULL);
     if (!window)
     {
-        std::cout << "Failed to create GLFW window" << std::endl;
+        std::cerr << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
-        exit(-1);
+        exit(1);
     }
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
@@ -41,9 +40,9 @@ GLFWwindow* createWindow(const std::string &name)
     // set input callback for mouse and keyboard
 
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-        std::cout << "Failed to initialize GLAD" << std::endl;
+        std::cerr << "Failed to initialize GLAD" << std::endl;
         glfwTerminate();
-        exit(-1);
+        exit(1);
     }
     glEnable(GL_DEPTH_TEST);
     std::cout << "OpenGL: " << glGetString(GL_VERSION) << "\n";
@@ -64,49 +63,73 @@ static void processInput(GLFWwindow* win, float dt, glm::mat4& model) {
     model = glm::rotate(model, dt * glm::radians(20.0f), glm::vec3(0,1,0));
 }
 
-void display(GLFWwindow* window, Shader shader, Model meshModel, glm::mat4& model, Renderer renderer, Camera camera) {
+void display(GLFWwindow* window, Shader shader, Model model, glm::mat4& modelMatrix, Renderer renderer, Camera camera) {
     float last = (float)glfwGetTime();
     while (!glfwWindowShouldClose(window)) {
         float now = (float)glfwGetTime();
         float dt = now - last; last = now;
         
         glfwPollEvents();
-        processInput(window, dt, model);
+        processInput(window, dt, modelMatrix);
         
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        renderer.clear();
 
         glm::mat4 view = camera.getViewMatrix();
         float aspect = (gH==0) ? 1.0f : (float)gW/(float)gH;
         glm::mat4 proj = camera.getProjection(aspect);
 
-        renderer.draw(meshModel, shader, model, view, proj, camera.Position);
+        renderer.draw(model, shader, modelMatrix, view, proj);
         glfwSwapBuffers(window);
     }
     glfwTerminate();
 }
 
-
-
-int main() {
+void inputValidator(int ac, char **av){
+    (void) av;
+    if (ac != 2) {
+        std::cerr << "Usage : ./scop file.obj" << std::endl;
+        exit(1);
+    }
     
-    std::string path = ""; // mock
+    std::string path = av[1];
+    if (path.length() >= 4 && path.substr(path.length() - 4) != ".obj")
+    {
+        std::cerr << "Invalid object file" << std::endl;
+        exit(1);
+    }
 
+    std::ifstream file(path, std::ios::in);
+    if(file.is_open()) {
+        if (file.peek() == std::ifstream::traits_type::eof()) {
+			std::cerr << "The object file is empty" << std::endl;
+			file.close();
+			exit(1);
+		}
+		file.close();
+    } else {
+        std::cerr << "Cannot open object file" << std::endl;
+        file.close();
+        exit(1);
+    }
+}
+
+int main(int ac, char **av) {
+    inputValidator(ac, av);
     initGLFW();
 
-    // readfile for get name
-    Model meshModel;
-    objectLoader(path, meshModel);
-    GLFWwindow* window = createWindow(meshModel.name);
+    Model model;
+    model.loadObject(av[1]);
+
+    GLFWwindow* window = createWindow(model.name);
     
-    meshModel.setup();
+    model.setup();
     Shader shader("src/shaders/vertexShader.glsl", "src/shaders/fragmentShader.glsl");
 
-    
     Camera camera;
     Renderer renderer;
-    glm::mat4 model(1.0f);
+    glm::mat4 modelMatrix(1.0f);
 
-    display(window, shader, meshModel, model, renderer, camera);
+    display(window, shader, model, modelMatrix, renderer, camera);
     
     return 0;
 }

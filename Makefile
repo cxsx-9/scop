@@ -20,7 +20,6 @@ endif
 SRCS_CPP = src/scop.cpp \
 		src/math.cpp \
 		src/model.cpp \
-		src/objectLoader.cpp \
 		src/shader.cpp \
 
 SRCS_C = src/glad.c
