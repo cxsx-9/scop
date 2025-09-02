@@ -1,0 +1,773 @@
+
+16 2 3 17 
+5 8 7 6 
+29 30 23 
+9 6 7 10 
+14 13 17 
+11 1 4 13 
+2 9 10 3 
+5 12 14 8 
+12 11 13 14 
+1 15 18 4 
+15 16 17 18 
+38 42 21 20 
+33 39 25 32 
+34 27 19 22 
+19 20 21 22 
+26 25 24 23 
+26 23 30 31 
+31 30 29 32 
+32 29 28 33 
+33 28 27 34 
+24 25 39 35 
+35 39 40 36 
+36 40 41 37 
+37 41 42 38 
+26 31 32 
+37 38 20 
+21 42 41 
+12 5 6 
+25 26 32 
+22 21 41 
+8 14 7 
+28 36 27 
+10 14 17 3 
+33 40 39 
+40 33 34 
+11 16 15 1 
+14 10 7 
+2 16 12 9 
+11 12 16 
+40 34 22 41 
+12 6 9 
+18 17 13 4 
+36 28 35 
+37 20 19 
+29 23 24 
+19 27 36 37 
+24 35 28 29 
+-------------------------
+[Info] Loaded object: 42 (42 total vertices, 228 faces)
+hasUV: false
+-------------------------
+[Debug] vertex position: 0.143677, -0.433773, 0.0468584
+[Debug] vertex position: 0.143677, -0.433773, 0.9
+[Debug] vertex position: -0.143677, -0.433773, 0.9
+[Debug] vertex position: -0.143677, -0.433773, 0.0468584
+[Debug] vertex position: 0.143677, 0.731865, -0.168033
+[Debug] vertex position: -0.143677, 0.731865, -0.168034
+[Debug] vertex position: -0.143677, 0.731865, 0.125015
+[Debug] vertex position: 0.143677, 0.731865, 0.125016
+[Debug] vertex position: -0.143632, 0.722046, -0.621244
+[Debug] vertex position: -0.143632, 0.349056, -0.313211
+[Debug] vertex position: -0.143632, 0.731487, -0.313211
+[Debug] vertex position: 0.143677, -0.180594, 0.9
+[Debug] vertex position: -0.143677, -0.180594, 0.9
+[Debug] vertex position: -0.143677, -0.151964, 0.559359
+[Debug] vertex position: -0.143677, -0.158648, -0.168034
+[Debug] vertex position: 0.143677, -0.158648, -0.168033
+[Debug] vertex position: 0.143677, -0.728154, -0.168034
+[Debug] vertex position: -0.143677, -0.728154, -0.168034
+[Debug] vertex position: 0.143677, -0.151964, 0.559359
+[Debug] vertex position: 0.143677, -0.731865, 0.0590203
+[Debug] vertex position: -0.143677, -0.731865, 0.0590197
+[Debug] vertex position: -0.143632, -0.0151397, -0.9
+[Debug] vertex position: 0.138239, -0.0151397, -0.9
+[Debug] vertex position: 0.138239, -0.424822, -0.9
+[Debug] vertex position: -0.143632, -0.424822, -0.9
+[Debug] vertex position: 0.138239, 0.376647, -0.636249
+[Debug] vertex position: 0.138239, 0.428285, -0.9
+[Debug] vertex position: 0.138239, 0.731487, -0.9
+[Debug] vertex position: 0.138239, 0.722047, -0.621244
+[Debug] vertex position: 0.138239, -0.0490368, -0.313211
+[Debug] vertex position: -0.143632, -0.0490368, -0.313211
+[Debug] vertex position: -0.143632, -0.424822, -0.313211
+[Debug] vertex position: 0.138239, -0.424822, -0.313211
+[Debug] vertex position: 0.138239, 0.731487, -0.313211
+[Debug] vertex position: -0.143632, 0.731487, -0.9
+[Debug] vertex position: 0.138239, 0.349056, -0.313211
+[Debug] vertex position: -0.143632, 0.376647, -0.636249
+[Debug] vertex position: -0.143632, 0.428285, -0.9
+[Debug] vertex position: 0.138239, -0.00966916, -0.627446
+[Debug] vertex position: -0.143632, -0.00966916, -0.627446
+[Debug] vertex position: 0.138239, -0.395749, -0.633003
+[Debug] vertex position: -0.143632, -0.395749, -0.633003
+[Debug] index: 0
+[Debug] index: 1
+[Debug] index: 2
+[Debug] index: 0
+[Debug] index: 2
+[Debug] index: 3
+[Debug] index: 4
+[Debug] index: 5
+[Debug] index: 6
+[Debug] index: 4
+[Debug] index: 6
+[Debug] index: 7
+[Debug] index: 8
+[Debug] index: 9
+[Debug] index: 10
+[Debug] index: 11
+[Debug] index: 7
+[Debug] index: 6
+[Debug] index: 11
+[Debug] index: 6
+[Debug] index: 12
+[Debug] index: 13
+[Debug] index: 14
+[Debug] index: 3
+[Debug] index: 15
+[Debug] index: 16
+[Debug] index: 17
+[Debug] index: 15
+[Debug] index: 17
+[Debug] index: 14
+[Debug] index: 1
+[Debug] index: 11
+[Debug] index: 12
+[Debug] index: 1
+[Debug] index: 12
+[Debug] index: 2
+[Debug] index: 4
+[Debug] index: 18
+[Debug] index: 13
+[Debug] index: 4
+[Debug] index: 13
+[Debug] index: 5
+[Debug] index: 18
+[Debug] index: 15
+[Debug] index: 14
+[Debug] index: 18
+[Debug] index: 14
+[Debug] index: 13
+[Debug] index: 16
+[Debug] index: 19
+[Debug] index: 20
+[Debug] index: 16
+[Debug] index: 20
+[Debug] index: 17
+[Debug] index: 19
+[Debug] index: 0
+[Debug] index: 3
+[Debug] index: 19
+[Debug] index: 3
+[Debug] index: 20
+[Debug] index: 21
+[Debug] index: 22
+[Debug] index: 23
+[Debug] index: 21
+[Debug] index: 23
+[Debug] index: 24
+[Debug] index: 25
+[Debug] index: 26
+[Debug] index: 27
+[Debug] index: 25
+[Debug] index: 27
+[Debug] index: 28
+[Debug] index: 29
+[Debug] index: 30
+[Debug] index: 31
+[Debug] index: 29
+[Debug] index: 31
+[Debug] index: 32
+[Debug] index: 31
+[Debug] index: 24
+[Debug] index: 23
+[Debug] index: 31
+[Debug] index: 23
+[Debug] index: 32
+[Debug] index: 33
+[Debug] index: 27
+[Debug] index: 34
+[Debug] index: 33
+[Debug] index: 34
+[Debug] index: 10
+[Debug] index: 33
+[Debug] index: 10
+[Debug] index: 9
+[Debug] index: 33
+[Debug] index: 9
+[Debug] index: 35
+[Debug] index: 35
+[Debug] index: 9
+[Debug] index: 8
+[Debug] index: 35
+[Debug] index: 8
+[Debug] index: 28
+[Debug] index: 28
+[Debug] index: 8
+[Debug] index: 36
+[Debug] index: 28
+[Debug] index: 36
+[Debug] index: 25
+[Debug] index: 25
+[Debug] index: 36
+[Debug] index: 30
+[Debug] index: 25
+[Debug] index: 30
+[Debug] index: 29
+[Debug] index: 34
+[Debug] index: 27
+[Debug] index: 26
+[Debug] index: 34
+[Debug] index: 26
+[Debug] index: 37
+[Debug] index: 37
+[Debug] index: 26
+[Debug] index: 38
+[Debug] index: 37
+[Debug] index: 38
+[Debug] index: 39
+[Debug] index: 39
+[Debug] index: 38
+[Debug] index: 40
+[Debug] index: 39
+[Debug] index: 40
+[Debug] index: 41
+[Debug] index: 41
+[Debug] index: 40
+[Debug] index: 22
+[Debug] index: 41
+[Debug] index: 22
+[Debug] index: 21
+[Debug] index: 33
+[Debug] index: 35
+[Debug] index: 28
+[Debug] index: 41
+[Debug] index: 21
+[Debug] index: 24
+[Debug] index: 23
+[Debug] index: 22
+[Debug] index: 40
+[Debug] index: 18
+[Debug] index: 4
+[Debug] index: 7
+[Debug] index: 27
+[Debug] index: 33
+[Debug] index: 28
+[Debug] index: 32
+[Debug] index: 23
+[Debug] index: 40
+[Debug] index: 5
+[Debug] index: 13
+[Debug] index: 6
+[Debug] index: 36
+[Debug] index: 39
+[Debug] index: 30
+[Debug] index: 12
+[Debug] index: 13
+[Debug] index: 3
+[Debug] index: 12
+[Debug] index: 3
+[Debug] index: 2
+[Debug] index: 25
+[Debug] index: 38
+[Debug] index: 26
+[Debug] index: 38
+[Debug] index: 25
+[Debug] index: 29
+[Debug] index: 15
+[Debug] index: 0
+[Debug] index: 19
+[Debug] index: 15
+[Debug] index: 19
+[Debug] index: 16
+[Debug] index: 13
+[Debug] index: 12
+[Debug] index: 6
+[Debug] index: 1
+[Debug] index: 0
+[Debug] index: 18
+[Debug] index: 1
+[Debug] index: 18
+[Debug] index: 11
+[Debug] index: 15
+[Debug] index: 18
+[Debug] index: 0
+[Debug] index: 38
+[Debug] index: 29
+[Debug] index: 32
+[Debug] index: 38
+[Debug] index: 32
+[Debug] index: 40
+[Debug] index: 18
+[Debug] index: 7
+[Debug] index: 11
+[Debug] index: 20
+[Debug] index: 3
+[Debug] index: 14
+[Debug] index: 20
+[Debug] index: 14
+[Debug] index: 17
+[Debug] index: 39
+[Debug] index: 36
+[Debug] index: 37
+[Debug] index: 41
+[Debug] index: 24
+[Debug] index: 31
+[Debug] index: 8
+[Debug] index: 10
+[Debug] index: 34
+[Debug] index: 31
+[Debug] index: 30
+[Debug] index: 39
+[Debug] index: 31
+[Debug] index: 39
+[Debug] index: 41
+[Debug] index: 34
+[Debug] index: 37
+[Debug] index: 36
+[Debug] index: 34
+[Debug] index: 36
+[Debug] index: 8
+OpenGL: 4.1 Metal - 89.4
+16 2 3 17 
+5 8 7 6 
+29 30 23 
+9 6 7 10 
+14 13 17 
+11 1 4 13 
+2 9 10 3 
+5 12 14 8 
+12 11 13 14 
+1 15 18 4 
+15 16 17 18 
+38 42 21 20 
+33 39 25 32 
+34 27 19 22 
+19 20 21 22 
+26 25 24 23 
+26 23 30 31 
+31 30 29 32 
+32 29 28 33 
+33 28 27 34 
+24 25 39 35 
+35 39 40 36 
+36 40 41 37 
+37 41 42 38 
+26 31 32 
+37 38 20 
+21 42 41 
+12 5 6 
+25 26 32 
+22 21 41 
+8 14 7 
+28 36 27 
+10 14 17 3 
+33 40 39 
+40 33 34 
+11 16 15 1 
+14 10 7 
+2 16 12 9 
+11 12 16 
+40 34 22 41 
+12 6 9 
+18 17 13 4 
+36 28 35 
+37 20 19 
+29 23 24 
+19 27 36 37 
+24 35 28 29 
+-------------------------
+[Info] Loaded object: 42 (170 total vertices, 228 faces)
+hasUV: false
+-------------------------
+[Debug] vertex position: 0.143677, -0.433773, 0.0468584
+[Debug] vertex position: 0.143677, -0.433773, 0.9
+[Debug] vertex position: -0.143677, -0.433773, 0.9
+[Debug] vertex position: -0.143677, -0.433773, 0.0468584
+[Debug] vertex position: 0.143677, 0.731865, -0.168033
+[Debug] vertex position: -0.143677, 0.731865, -0.168034
+[Debug] vertex position: -0.143677, 0.731865, 0.125015
+[Debug] vertex position: 0.143677, 0.731865, 0.125016
+[Debug] vertex position: -0.143632, 0.722046, -0.621244
+[Debug] vertex position: -0.143632, 0.349056, -0.313211
+[Debug] vertex position: -0.143632, 0.731487, -0.313211
+[Debug] vertex position: 0.143677, -0.180594, 0.9
+[Debug] vertex position: 0.143677, 0.731865, 0.125016
+[Debug] vertex position: -0.143677, 0.731865, 0.125015
+[Debug] vertex position: -0.143677, -0.180594, 0.9
+[Debug] vertex position: -0.143677, -0.151964, 0.559359
+[Debug] vertex position: -0.143677, -0.158648, -0.168034
+[Debug] vertex position: -0.143677, -0.433773, 0.0468584
+[Debug] vertex position: 0.143677, -0.158648, -0.168033
+[Debug] vertex position: 0.143677, -0.728154, -0.168034
+[Debug] vertex position: -0.143677, -0.728154, -0.168034
+[Debug] vertex position: -0.143677, -0.158648, -0.168034
+[Debug] vertex position: 0.143677, -0.433773, 0.9
+[Debug] vertex position: 0.143677, -0.180594, 0.9
+[Debug] vertex position: -0.143677, -0.180594, 0.9
+[Debug] vertex position: -0.143677, -0.433773, 0.9
+[Debug] vertex position: 0.143677, 0.731865, -0.168033
+[Debug] vertex position: 0.143677, -0.151964, 0.559359
+[Debug] vertex position: -0.143677, -0.151964, 0.559359
+[Debug] vertex position: -0.143677, 0.731865, -0.168034
+[Debug] vertex position: 0.143677, -0.151964, 0.559359
+[Debug] vertex position: 0.143677, -0.158648, -0.168033
+[Debug] vertex position: -0.143677, -0.158648, -0.168034
+[Debug] vertex position: -0.143677, -0.151964, 0.559359
+[Debug] vertex position: 0.143677, -0.728154, -0.168034
+[Debug] vertex position: 0.143677, -0.731865, 0.0590203
+[Debug] vertex position: -0.143677, -0.731865, 0.0590197
+[Debug] vertex position: -0.143677, -0.728154, -0.168034
+[Debug] vertex position: 0.143677, -0.731865, 0.0590203
+[Debug] vertex position: 0.143677, -0.433773, 0.0468584
+[Debug] vertex position: -0.143677, -0.433773, 0.0468584
+[Debug] vertex position: -0.143677, -0.731865, 0.0590197
+[Debug] vertex position: -0.143632, -0.0151397, -0.9
+[Debug] vertex position: 0.138239, -0.0151397, -0.9
+[Debug] vertex position: 0.138239, -0.424822, -0.9
+[Debug] vertex position: -0.143632, -0.424822, -0.9
+[Debug] vertex position: 0.138239, 0.376647, -0.636249
+[Debug] vertex position: 0.138239, 0.428285, -0.9
+[Debug] vertex position: 0.138239, 0.731487, -0.9
+[Debug] vertex position: 0.138239, 0.722047, -0.621244
+[Debug] vertex position: 0.138239, -0.0490368, -0.313211
+[Debug] vertex position: -0.143632, -0.0490368, -0.313211
+[Debug] vertex position: -0.143632, -0.424822, -0.313211
+[Debug] vertex position: 0.138239, -0.424822, -0.313211
+[Debug] vertex position: -0.143632, -0.424822, -0.313211
+[Debug] vertex position: -0.143632, -0.424822, -0.9
+[Debug] vertex position: 0.138239, -0.424822, -0.9
+[Debug] vertex position: 0.138239, -0.424822, -0.313211
+[Debug] vertex position: 0.138239, 0.731487, -0.313211
+[Debug] vertex position: 0.138239, 0.731487, -0.9
+[Debug] vertex position: -0.143632, 0.731487, -0.9
+[Debug] vertex position: -0.143632, 0.731487, -0.313211
+[Debug] vertex position: 0.138239, 0.731487, -0.313211
+[Debug] vertex position: -0.143632, 0.731487, -0.313211
+[Debug] vertex position: -0.143632, 0.349056, -0.313211
+[Debug] vertex position: 0.138239, 0.349056, -0.313211
+[Debug] vertex position: 0.138239, 0.349056, -0.313211
+[Debug] vertex position: -0.143632, 0.349056, -0.313211
+[Debug] vertex position: -0.143632, 0.722046, -0.621244
+[Debug] vertex position: 0.138239, 0.722047, -0.621244
+[Debug] vertex position: 0.138239, 0.722047, -0.621244
+[Debug] vertex position: -0.143632, 0.722046, -0.621244
+[Debug] vertex position: -0.143632, 0.376647, -0.636249
+[Debug] vertex position: 0.138239, 0.376647, -0.636249
+[Debug] vertex position: 0.138239, 0.376647, -0.636249
+[Debug] vertex position: -0.143632, 0.376647, -0.636249
+[Debug] vertex position: -0.143632, -0.0490368, -0.313211
+[Debug] vertex position: 0.138239, -0.0490368, -0.313211
+[Debug] vertex position: -0.143632, 0.731487, -0.9
+[Debug] vertex position: 0.138239, 0.731487, -0.9
+[Debug] vertex position: 0.138239, 0.428285, -0.9
+[Debug] vertex position: -0.143632, 0.428285, -0.9
+[Debug] vertex position: -0.143632, 0.428285, -0.9
+[Debug] vertex position: 0.138239, 0.428285, -0.9
+[Debug] vertex position: 0.138239, -0.00966916, -0.627446
+[Debug] vertex position: -0.143632, -0.00966916, -0.627446
+[Debug] vertex position: -0.143632, -0.00966916, -0.627446
+[Debug] vertex position: 0.138239, -0.00966916, -0.627446
+[Debug] vertex position: 0.138239, -0.395749, -0.633003
+[Debug] vertex position: -0.143632, -0.395749, -0.633003
+[Debug] vertex position: -0.143632, -0.395749, -0.633003
+[Debug] vertex position: 0.138239, -0.395749, -0.633003
+[Debug] vertex position: 0.138239, -0.0151397, -0.9
+[Debug] vertex position: -0.143632, -0.0151397, -0.9
+[Debug] vertex position: 0.138239, 0.731487, -0.313211
+[Debug] vertex position: 0.138239, 0.349056, -0.313211
+[Debug] vertex position: 0.138239, 0.722047, -0.621244
+[Debug] vertex position: -0.143632, -0.395749, -0.633003
+[Debug] vertex position: -0.143632, -0.0151397, -0.9
+[Debug] vertex position: -0.143632, -0.424822, -0.9
+[Debug] vertex position: 0.138239, -0.424822, -0.9
+[Debug] vertex position: 0.138239, -0.0151397, -0.9
+[Debug] vertex position: 0.138239, -0.395749, -0.633003
+[Debug] vertex position: 0.143677, -0.151964, 0.559359
+[Debug] vertex position: 0.143677, 0.731865, -0.168033
+[Debug] vertex position: 0.143677, 0.731865, 0.125016
+[Debug] vertex position: 0.138239, 0.731487, -0.9
+[Debug] vertex position: 0.138239, 0.731487, -0.313211
+[Debug] vertex position: 0.138239, 0.722047, -0.621244
+[Debug] vertex position: 0.138239, -0.424822, -0.313211
+[Debug] vertex position: 0.138239, -0.424822, -0.9
+[Debug] vertex position: 0.138239, -0.395749, -0.633003
+[Debug] vertex position: -0.143677, 0.731865, -0.168034
+[Debug] vertex position: -0.143677, -0.151964, 0.559359
+[Debug] vertex position: -0.143677, 0.731865, 0.125015
+[Debug] vertex position: -0.143632, 0.376647, -0.636249
+[Debug] vertex position: -0.143632, -0.00966916, -0.627446
+[Debug] vertex position: -0.143632, -0.0490368, -0.313211
+[Debug] vertex position: -0.143677, -0.180594, 0.9
+[Debug] vertex position: -0.143677, -0.151964, 0.559359
+[Debug] vertex position: -0.143677, -0.433773, 0.0468584
+[Debug] vertex position: -0.143677, -0.433773, 0.9
+[Debug] vertex position: 0.138239, 0.376647, -0.636249
+[Debug] vertex position: 0.138239, -0.00966916, -0.627446
+[Debug] vertex position: 0.138239, 0.428285, -0.9
+[Debug] vertex position: 0.138239, -0.00966916, -0.627446
+[Debug] vertex position: 0.138239, 0.376647, -0.636249
+[Debug] vertex position: 0.138239, -0.0490368, -0.313211
+[Debug] vertex position: 0.143677, -0.158648, -0.168033
+[Debug] vertex position: 0.143677, -0.433773, 0.0468584
+[Debug] vertex position: 0.143677, -0.731865, 0.0590203
+[Debug] vertex position: 0.143677, -0.728154, -0.168034
+[Debug] vertex position: -0.143677, -0.151964, 0.559359
+[Debug] vertex position: -0.143677, -0.180594, 0.9
+[Debug] vertex position: -0.143677, 0.731865, 0.125015
+[Debug] vertex position: 0.143677, -0.433773, 0.9
+[Debug] vertex position: 0.143677, -0.433773, 0.0468584
+[Debug] vertex position: 0.143677, -0.151964, 0.559359
+[Debug] vertex position: 0.143677, -0.180594, 0.9
+[Debug] vertex position: 0.143677, -0.158648, -0.168033
+[Debug] vertex position: 0.143677, -0.151964, 0.559359
+[Debug] vertex position: 0.143677, -0.433773, 0.0468584
+[Debug] vertex position: 0.138239, -0.00966916, -0.627446
+[Debug] vertex position: 0.138239, -0.0490368, -0.313211
+[Debug] vertex position: 0.138239, -0.424822, -0.313211
+[Debug] vertex position: 0.138239, -0.395749, -0.633003
+[Debug] vertex position: 0.143677, -0.151964, 0.559359
+[Debug] vertex position: 0.143677, 0.731865, 0.125016
+[Debug] vertex position: 0.143677, -0.180594, 0.9
+[Debug] vertex position: -0.143677, -0.731865, 0.0590197
+[Debug] vertex position: -0.143677, -0.433773, 0.0468584
+[Debug] vertex position: -0.143677, -0.158648, -0.168034
+[Debug] vertex position: -0.143677, -0.728154, -0.168034
+[Debug] vertex position: -0.143632, -0.00966916, -0.627446
+[Debug] vertex position: -0.143632, 0.376647, -0.636249
+[Debug] vertex position: -0.143632, 0.428285, -0.9
+[Debug] vertex position: -0.143632, -0.395749, -0.633003
+[Debug] vertex position: -0.143632, -0.424822, -0.9
+[Debug] vertex position: -0.143632, -0.424822, -0.313211
+[Debug] vertex position: -0.143632, 0.722046, -0.621244
+[Debug] vertex position: -0.143632, 0.731487, -0.313211
+[Debug] vertex position: -0.143632, 0.731487, -0.9
+[Debug] vertex position: -0.143632, -0.424822, -0.313211
+[Debug] vertex position: -0.143632, -0.0490368, -0.313211
+[Debug] vertex position: -0.143632, -0.00966916, -0.627446
+[Debug] vertex position: -0.143632, -0.395749, -0.633003
+[Debug] vertex position: -0.143632, 0.731487, -0.9
+[Debug] vertex position: -0.143632, 0.428285, -0.9
+[Debug] vertex position: -0.143632, 0.376647, -0.636249
+[Debug] vertex position: -0.143632, 0.722046, -0.621244
+[Debug] index: 0
+[Debug] index: 1
+[Debug] index: 2
+[Debug] index: 0
+[Debug] index: 2
+[Debug] index: 3
+[Debug] index: 4
+[Debug] index: 5
+[Debug] index: 6
+[Debug] index: 4
+[Debug] index: 6
+[Debug] index: 7
+[Debug] index: 8
+[Debug] index: 9
+[Debug] index: 10
+[Debug] index: 11
+[Debug] index: 12
+[Debug] index: 13
+[Debug] index: 11
+[Debug] index: 13
+[Debug] index: 14
+[Debug] index: 15
+[Debug] index: 16
+[Debug] index: 17
+[Debug] index: 18
+[Debug] index: 19
+[Debug] index: 20
+[Debug] index: 18
+[Debug] index: 20
+[Debug] index: 21
+[Debug] index: 22
+[Debug] index: 23
+[Debug] index: 24
+[Debug] index: 22
+[Debug] index: 24
+[Debug] index: 25
+[Debug] index: 26
+[Debug] index: 27
+[Debug] index: 28
+[Debug] index: 26
+[Debug] index: 28
+[Debug] index: 29
+[Debug] index: 30
+[Debug] index: 31
+[Debug] index: 32
+[Debug] index: 30
+[Debug] index: 32
+[Debug] index: 33
+[Debug] index: 34
+[Debug] index: 35
+[Debug] index: 36
+[Debug] index: 34
+[Debug] index: 36
+[Debug] index: 37
+[Debug] index: 38
+[Debug] index: 39
+[Debug] index: 40
+[Debug] index: 38
+[Debug] index: 40
+[Debug] index: 41
+[Debug] index: 42
+[Debug] index: 43
+[Debug] index: 44
+[Debug] index: 42
+[Debug] index: 44
+[Debug] index: 45
+[Debug] index: 46
+[Debug] index: 47
+[Debug] index: 48
+[Debug] index: 46
+[Debug] index: 48
+[Debug] index: 49
+[Debug] index: 50
+[Debug] index: 51
+[Debug] index: 52
+[Debug] index: 50
+[Debug] index: 52
+[Debug] index: 53
+[Debug] index: 54
+[Debug] index: 55
+[Debug] index: 56
+[Debug] index: 54
+[Debug] index: 56
+[Debug] index: 57
+[Debug] index: 58
+[Debug] index: 59
+[Debug] index: 60
+[Debug] index: 58
+[Debug] index: 60
+[Debug] index: 61
+[Debug] index: 62
+[Debug] index: 63
+[Debug] index: 64
+[Debug] index: 62
+[Debug] index: 64
+[Debug] index: 65
+[Debug] index: 66
+[Debug] index: 67
+[Debug] index: 68
+[Debug] index: 66
+[Debug] index: 68
+[Debug] index: 69
+[Debug] index: 70
+[Debug] index: 71
+[Debug] index: 72
+[Debug] index: 70
+[Debug] index: 72
+[Debug] index: 73
+[Debug] index: 74
+[Debug] index: 75
+[Debug] index: 76
+[Debug] index: 74
+[Debug] index: 76
+[Debug] index: 77
+[Debug] index: 78
+[Debug] index: 79
+[Debug] index: 80
+[Debug] index: 78
+[Debug] index: 80
+[Debug] index: 81
+[Debug] index: 82
+[Debug] index: 83
+[Debug] index: 84
+[Debug] index: 82
+[Debug] index: 84
+[Debug] index: 85
+[Debug] index: 86
+[Debug] index: 87
+[Debug] index: 88
+[Debug] index: 86
+[Debug] index: 88
+[Debug] index: 89
+[Debug] index: 90
+[Debug] index: 91
+[Debug] index: 92
+[Debug] index: 90
+[Debug] index: 92
+[Debug] index: 93
+[Debug] index: 94
+[Debug] index: 95
+[Debug] index: 96
+[Debug] index: 97
+[Debug] index: 98
+[Debug] index: 99
+[Debug] index: 100
+[Debug] index: 101
+[Debug] index: 102
+[Debug] index: 103
+[Debug] index: 104
+[Debug] index: 105
+[Debug] index: 106
+[Debug] index: 107
+[Debug] index: 108
+[Debug] index: 109
+[Debug] index: 110
+[Debug] index: 111
+[Debug] index: 112
+[Debug] index: 113
+[Debug] index: 114
+[Debug] index: 115
+[Debug] index: 116
+[Debug] index: 117
+[Debug] index: 118
+[Debug] index: 119
+[Debug] index: 120
+[Debug] index: 118
+[Debug] index: 120
+[Debug] index: 121
+[Debug] index: 122
+[Debug] index: 123
+[Debug] index: 124
+[Debug] index: 125
+[Debug] index: 126
+[Debug] index: 127
+[Debug] index: 128
+[Debug] index: 129
+[Debug] index: 130
+[Debug] index: 128
+[Debug] index: 130
+[Debug] index: 131
+[Debug] index: 132
+[Debug] index: 133
+[Debug] index: 134
+[Debug] index: 135
+[Debug] index: 136
+[Debug] index: 137
+[Debug] index: 135
+[Debug] index: 137
+[Debug] index: 138
+[Debug] index: 139
+[Debug] index: 140
+[Debug] index: 141
+[Debug] index: 142
+[Debug] index: 143
+[Debug] index: 144
+[Debug] index: 142
+[Debug] index: 144
+[Debug] index: 145
+[Debug] index: 146
+[Debug] index: 147
+[Debug] index: 148
+[Debug] index: 149
+[Debug] index: 150
+[Debug] index: 151
+[Debug] index: 149
+[Debug] index: 151
+[Debug] index: 152
+[Debug] index: 153
+[Debug] index: 154
+[Debug] index: 155
+[Debug] index: 156
+[Debug] index: 157
+[Debug] index: 158
+[Debug] index: 159
+[Debug] index: 160
+[Debug] index: 161
+[Debug] index: 162
+[Debug] index: 163
+[Debug] index: 164
+[Debug] index: 162
+[Debug] index: 164
+[Debug] index: 165
+[Debug] index: 166
+[Debug] index: 167
+[Debug] index: 168
+[Debug] index: 166
+[Debug] index: 168
+[Debug] index: 169
+OpenGL: 4.1 Metal - 89.4

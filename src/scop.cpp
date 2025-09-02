@@ -6,6 +6,7 @@
 
 static int gW=800, gH=600;
 static bool gWire=false;
+static bool gRotate=true;
 
 void initGLFW(){
     glfwInit();
@@ -18,6 +19,18 @@ void initGLFW(){
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
     (void) window;
     glViewport(0, 0, width, height);
+}
+
+void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    (void) window; (void) scancode; (void) action; (void) mods;
+    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, true);
+    if (key == GLFW_KEY_T && action == GLFW_PRESS)
+        gWire = !gWire;
+    if (key == GLFW_KEY_R && action == GLFW_PRESS)
+        gRotate = !gRotate;
+    glPolygonMode(GL_FRONT_AND_BACK, gWire ? GL_LINE : GL_FILL);
 }
 
 GLFWwindow* createWindow(const std::string &name)
@@ -34,9 +47,7 @@ GLFWwindow* createWindow(const std::string &name)
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     
     // set input callback for mouse and keyboard
-    
-    
-
+    glfwSetKeyCallback(window, keyCallback);
     // set input callback for mouse and keyboard
 
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
@@ -50,17 +61,9 @@ GLFWwindow* createWindow(const std::string &name)
     return window;
 }
 
-static void processInput(GLFWwindow* win, float dt, glm::mat4& model) {
-    if (glfwGetKey(win, GLFW_KEY_ESCAPE) == GLFW_PRESS) glfwSetWindowShouldClose(win, true);
-
-    if (glfwGetKey(win, GLFW_KEY_R) == GLFW_PRESS) {
-        if (!gWire) { glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); gWire = true; }
-    }
-    if (glfwGetKey(win, GLFW_KEY_T) == GLFW_PRESS) {
-        if (gWire) { glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); gWire = false; }
-    }
-
-    model = glm::rotate(model, dt * glm::radians(20.0f), glm::vec3(0,1,0));
+static void updateModel(float dt, glm::mat4& model) {
+    if (gRotate)
+        model = glm::rotate(model, dt * glm::radians(20.0f), glm::vec3(0,1,0));
 }
 
 void display(GLFWwindow* window, Shader shader, Model model, glm::mat4& modelMatrix, Renderer renderer, Camera camera) {
@@ -70,7 +73,7 @@ void display(GLFWwindow* window, Shader shader, Model model, glm::mat4& modelMat
         float dt = now - last; last = now;
         
         glfwPollEvents();
-        processInput(window, dt, modelMatrix);
+        updateModel(dt, modelMatrix);
         
         renderer.clear();
 
@@ -92,6 +95,14 @@ void inputValidator(int ac, char **av){
     }
     
     std::string path = av[1];
+    
+    // Debug
+    if (path == "mock")
+    {
+        std::cout << "[Debug]: using mock object" << std::endl;
+        return;
+    }
+
     if (path.length() >= 4 && path.substr(path.length() - 4) != ".obj")
     {
         std::cerr << "Invalid object file" << std::endl;
@@ -114,6 +125,7 @@ void inputValidator(int ac, char **av){
 }
 
 int main(int ac, char **av) {
+    (void) ac;
     inputValidator(ac, av);
     initGLFW();
 

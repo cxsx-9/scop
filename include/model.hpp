@@ -6,23 +6,41 @@ struct Vertex {
     glm::vec3 position;
     glm::vec3 normal;
     glm::vec2 texCoord;
+
+    bool operator==(const Vertex &other) const {
+    return position == other.position &&
+            normal   == other.normal &&
+            texCoord == other.texCoord;
+    }
 };
 
-// struct Material {
-//     std::string name;
+struct VertexHasher {
+    size_t operator()(const Vertex& v) const {
+        return std::hash<int>{}(int(v.position.x*1000)) ^
+               std::hash<int>{}(int(v.position.y*1000)) ^
+               std::hash<int>{}(int(v.position.z*1000));
+    }
+};
 
-//     // glm::vec3 ambientColor    = glm::vec3(0.0f); // Ka
-//     glm::vec3 diffuseColor    = glm::vec3(0.64f); // Kd
-//     // glm::vec3 specularColor   = glm::vec3(0.5f); // Ks
-//     // float shininess           = 32.0f;           // Ns
-//     // float opacity             = 1.0f;            // d
-//     // int illumModel            = 2;               // illum
-//     // float opticalDensity      = 1.0f;            // Ni (Index of Refraction)
+struct VertexEqual {
+    bool operator()(const Vertex& a, const Vertex& b) const {
+        auto equalFloat = [](float x, float y) {
+            return std::abs(x - y) < 0.0001f;
+        };
 
-//     GLuint diffuseMap  = 0;
-//     // GLuint specularMap = 0;
-//     // GLuint normalMap   = 0;
-// };
+        return
+            equalFloat(a.position.x, b.position.x) &&
+            equalFloat(a.position.y, b.position.y) &&
+            equalFloat(a.position.z, b.position.z) &&
+
+            equalFloat(a.normal.x, b.normal.x) &&
+            equalFloat(a.normal.y, b.normal.y) &&
+            equalFloat(a.normal.z, b.normal.z) &&
+
+            equalFloat(a.texCoord.x, b.texCoord.x) &&
+            equalFloat(a.texCoord.y, b.texCoord.y);
+    }
+};
 
 struct Material {
     std::string name;
@@ -36,7 +54,7 @@ struct Material {
 };
 
 struct FaceIndex {
-    unsigned int v, t, n;
+    int v, t, n;
 };
 
 class Model{
@@ -46,18 +64,19 @@ class Model{
         std::vector<Vertex>         vertices;
         std::vector<unsigned int>   indices;
         bool hasUV      = false;
-        bool hasNormals = false;
 
         Material material;
-
-
-        void bind() const;
-        void loadObject(const std::string &path);
 
         Model();
         ~Model();
 
         void setup();
+        void bind() const;
+        void loadObject(const std::string &path);
+        void centerAndNormalize(float targetExtent, float margin);
+        FaceIndex parseFaceToken(const std::string &token);
+        void computeNormals();
+        void deduplicateVertices();
 };
 
 void mockup(Model &model);
