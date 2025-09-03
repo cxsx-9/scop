@@ -3,10 +3,10 @@
 #include "model.hpp"
 #include "camera.hpp"
 #include "renderer.hpp"
+#include "inputManager.hpp"
 
 static int gW=800, gH=600;
-static bool gWire=false;
-static bool gRotate=true;
+static InputManager *gInputManager;
 
 void initGLFW(){
     glfwInit();
@@ -16,21 +16,33 @@ void initGLFW(){
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // for macOS
 }
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
+void framebufferSizeCallback(GLFWwindow* window, int width, int height) {
     (void) window;
-    glViewport(0, 0, width, height);
+    gW = (width > 0) ? width : 1;
+    gH = (height > 0) ? height : 1;
+    glViewport(0, 0, gW, gH);
 }
 
 void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
     (void) window; (void) scancode; (void) action; (void) mods;
-    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, true);
-    if (key == GLFW_KEY_T && action == GLFW_PRESS)
-        gWire = !gWire;
-    if (key == GLFW_KEY_R && action == GLFW_PRESS)
-        gRotate = !gRotate;
-    glPolygonMode(GL_FRONT_AND_BACK, gWire ? GL_LINE : GL_FILL);
+    gInputManager->handleKey(key, action);
+}
+
+void mouseCallback(GLFWwindow* window, double xpos, double ypos) {
+    (void) window;
+    if (gInputManager->mouseControl)
+        gInputManager->getCamera()->processMouse((float)xpos, (float)ypos);
+}
+
+void scrollCallback(GLFWwindow* window, double xoffset, double yoffset) {
+    (void) window; (void) xoffset; (void) yoffset;
+    gInputManager->getCamera()->processScroll((float)yoffset);
+}
+
+void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
+    (void) window; (void) button; (void) action; (void) mods;
+    gInputManager->handleMouseButton(button, action);
 }
 
 GLFWwindow* createWindow(const std::string &name)
@@ -44,11 +56,12 @@ GLFWwindow* createWindow(const std::string &name)
         exit(1);
     }
     glfwMakeContextCurrent(window);
-    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    glfwSetFramebufferSizeCallback(window, framebufferSizeCallback);
     
-    // set input callback for mouse and keyboard
     glfwSetKeyCallback(window, keyCallback);
-    // set input callback for mouse and keyboard
+    glfwSetCursorPosCallback(window, mouseCallback);
+    glfwSetScrollCallback(window, scrollCallback);
+    glfwSetMouseButtonCallback(window, mouseButtonCallback);
 
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
         std::cerr << "Failed to initialize GLAD" << std::endl;
@@ -61,67 +74,27 @@ GLFWwindow* createWindow(const std::string &name)
     return window;
 }
 
-static void updateModel(float dt, glm::mat4& model) {
-    if (gRotate)
-        model = glm::rotate(model, dt * glm::radians(20.0f), glm::vec3(0,1,0));
-}
-
-void display(GLFWwindow* window, Shader shader, Model model, glm::mat4& modelMatrix, Renderer renderer, Camera camera) {
+void display(GLFWwindow* window, Shader shader, Model model, glm::mat4& modelMatrix, Renderer renderer) {
     float last = (float)glfwGetTime();
     while (!glfwWindowShouldClose(window)) {
         float now = (float)glfwGetTime();
         float dt = now - last; last = now;
         
         glfwPollEvents();
-        updateModel(dt, modelMatrix);
-        
+        gInputManager->processInput(dt, modelMatrix);
+
         renderer.clear();
 
-        glm::mat4 view = camera.getViewMatrix();
-        float aspect = (gH==0) ? 1.0f : (float)gW/(float)gH;
-        glm::mat4 proj = camera.getProjection(aspect);
+        int fbW, fbH;
+        glfwGetFramebufferSize(window, &fbW, &fbH);
+        float aspect = (fbH == 0) ? 1.0f : (float)fbW / (float)fbH;
+        glm::mat4 view = gInputManager->getCamera()->getViewMatrix();
+        glm::mat4 proj = gInputManager->getCamera()->getProjection(aspect);
 
         renderer.draw(model, shader, modelMatrix, view, proj);
         glfwSwapBuffers(window);
     }
     glfwTerminate();
-}
-
-void inputValidator(int ac, char **av){
-    (void) av;
-    if (ac != 2) {
-        std::cerr << "Usage : ./scop file.obj" << std::endl;
-        exit(1);
-    }
-    
-    std::string path = av[1];
-    
-    // Debug
-    if (path == "mock")
-    {
-        std::cout << "[Debug]: using mock object" << std::endl;
-        return;
-    }
-
-    if (path.length() >= 4 && path.substr(path.length() - 4) != ".obj")
-    {
-        std::cerr << "Invalid object file" << std::endl;
-        exit(1);
-    }
-
-    std::ifstream file(path, std::ios::in);
-    if(file.is_open()) {
-        if (file.peek() == std::ifstream::traits_type::eof()) {
-			std::cerr << "The object file is empty" << std::endl;
-			file.close();
-			exit(1);
-		}
-		file.close();
-    } else {
-        std::cerr << "Cannot open object file" << std::endl;
-        file.close();
-        exit(1);
-    }
 }
 
 int main(int ac, char **av) {
@@ -137,11 +110,14 @@ int main(int ac, char **av) {
     model.setup();
     Shader shader("src/shaders/vertexShader.glsl", "src/shaders/fragmentShader.glsl");
 
-    Camera camera;
+    Camera* camera = new Camera();
+    InputManager inputManager(camera, window);
+    gInputManager = &inputManager;
+
     Renderer renderer;
     glm::mat4 modelMatrix(1.0f);
 
-    display(window, shader, model, modelMatrix, renderer, camera);
+    display(window, shader, model, modelMatrix, renderer);
     
     return 0;
 }

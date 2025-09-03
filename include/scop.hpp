@@ -17,11 +17,4 @@
 
 #include "math.hpp"
 
-// #define WINDOW_WIDTH 3200
-// #define WINDOW_HEIGHT 1800
-// #define WINDOW_WIDTH 800
-// #define WINDOW_HEIGHT 600
-
-// struct Vertex{
-//     float x, y, z, texX, texY, normalX, normalY, normalZ;
-// };
+void inputValidator(int ac, char **av);
