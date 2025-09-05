@@ -51,7 +51,7 @@ GLFWwindow* createWindow(const std::string &name)
     window = glfwCreateWindow(gW, gH, name.c_str(), NULL, NULL);
     if (!window)
     {
-        std::cerr << "Failed to create GLFW window" << std::endl;
+        std::cerr << "[Error] Failed to create GLFW window" << std::endl;
         glfwTerminate();
         exit(1);
     }
@@ -64,7 +64,7 @@ GLFWwindow* createWindow(const std::string &name)
     glfwSetMouseButtonCallback(window, mouseButtonCallback);
 
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-        std::cerr << "Failed to initialize GLAD" << std::endl;
+        std::cerr << "[Error] Failed to initialize GLAD" << std::endl;
         glfwTerminate();
         exit(1);
     }
@@ -74,7 +74,7 @@ GLFWwindow* createWindow(const std::string &name)
     return window;
 }
 
-void display(GLFWwindow* window, Shader shader, Model model, mymath::mat4& modelMatrix, Renderer renderer) {
+void display(GLFWwindow* window, Shader& shader, Model& model, mymath::mat4& modelMatrix, Renderer& renderer) {
     float last = (float)glfwGetTime();
     while (!glfwWindowShouldClose(window)) {
         float now = (float)glfwGetTime();
@@ -98,13 +98,13 @@ void display(GLFWwindow* window, Shader shader, Model model, mymath::mat4& model
 }
 
 int main(int ac, char **av) {
-    (void) ac;
     inputValidator(ac, av);
     initGLFW();
 
     Model model;
     model.loadObject(av[1]);
-    if (ac == 3) model.loadTexture(av[2]);
+    if (ac == 3 && textureValidator(av[2]) == 0) model.loadTexture(av[2]);
+    model.showInfo();
 
     GLFWwindow* window = createWindow(model.name);
     

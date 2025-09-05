@@ -20,7 +20,7 @@ Shader::Shader(const char* vsPath, const char* fsPath) {
         glGetProgramiv(ID, GL_INFO_LOG_LENGTH, &len);
         std::string log; log.resize(len);
         glGetProgramInfoLog(ID, len, nullptr, &log[0]);
-        std::cerr << "[Program Link Error] " << log << "\n";
+        std::cerr << "[Error] Program Link Error: " << log << "\n";
     }
     glDeleteShader(vs);
     glDeleteShader(fs);
@@ -69,9 +69,10 @@ GLuint Shader::compile(GLenum type, const std::string&src) {
     if (result == GL_FALSE) {
         GLint len = 0;
         glGetShaderiv(id, GL_INFO_LOG_LENGTH, &len);
-        std::string log; log.resize(len);
+        std::string log;
+        log.resize(len);
         glGetShaderInfoLog(id, len, &len, &log[0]);
-        std::cerr << "[Shader Compile Error] " << log << "\n";
+        std::cerr << "[Error] Shader Compile Error: " << log << "\n";
     }
     return id;
 }

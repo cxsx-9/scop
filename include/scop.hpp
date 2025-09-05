@@ -14,3 +14,4 @@
 #include "math.hpp"
 
 void inputValidator(int ac, char **av);
+int textureValidator(char *path);

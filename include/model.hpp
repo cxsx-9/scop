@@ -75,6 +75,8 @@ class Model{
         FaceIndex parseFaceToken(const std::string &token);
         void computeNormals();
         void deduplicateVertices();
+        void generateAutoUVs();
+        void showInfo() const;
 };
 
 void mockup(Model &model);

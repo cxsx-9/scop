@@ -69,6 +69,7 @@ namespace mymath {
     mymath::vec3 max(const mymath::vec3& a, const mymath::vec3& b);
     float length(const vec3& v);
     vec3 normalize(const vec3& v);
+    vec3 abs(const vec3& v);
 
     // Mat4
     // translate / rotate / scale

@@ -24,24 +24,22 @@ void inputValidator(int ac, char **av){
         exit(1);
     }
     std::string objPath = av[1];
-    
     // Debug
     if (objPath == "mock") {
         std::cout << "[Debug]: using mock object" << std::endl;
         return;
     }
-
     if ((objPath.length() >= 4 && objPath.substr(objPath.length() - 4) != ".obj") || checkFileAccessibility(objPath) != 0) {
         std::cerr << "[Error] Invalid object file : " << objPath << std::endl;
         exit(1);
     }
+}
 
-    if (ac == 3) {
-        std::string texPath = av[2];
-        if ((texPath.length() >= 4 && (texPath.substr(texPath.length() - 4) != ".png" && texPath.substr(texPath.length() - 4) != ".jpg")) || checkFileAccessibility(texPath) != 0) {
-            std::cerr << "[Error] Invalid texture file : " << texPath << std::endl;
-            std::cerr << "[Error] Continue without texture" << std::endl;
-            return;
-        }
+int textureValidator(char *path){
+    std::string texPath = path;
+    if ((texPath.length() >= 4 && (texPath.substr(texPath.length() - 4) != ".png" && texPath.substr(texPath.length() - 4) != ".jpg")) || checkFileAccessibility(texPath) != 0) {
+        std::cerr << "[Error] Invalid texture file : " << texPath << std::endl << "Continue without texture." << std::endl;
+        return -1;
     }
+    return 0;
 }

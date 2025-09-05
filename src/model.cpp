@@ -3,8 +3,6 @@
 #include "stb_image.h"
 #include "math.hpp"
 
-static void showInfo(const Model &model);
-
 Model::Model() {};
 
 Model::~Model() {
@@ -39,8 +37,9 @@ void Model::setup() {
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const void*)offsetof(Vertex, texCoord));
     glBindVertexArray(0);
 
-    // setup material if has
     if (!material.hasTexture) return;
+    
+    // setup material if has
     int width, height, channels;
     stbi_set_flip_vertically_on_load(true);
     unsigned char *data = stbi_load(material.path.c_str(), &width, &height, &channels, 0);
@@ -74,7 +73,7 @@ void Model::centerAndNormalize(float targetExtent = 2.0f, float margin = 0.9f) {
     if (vertices.empty()) return;
 
     mymath::vec3 minp(FLT_MAX);
-    mymath::vec3 maxp(FLT_MIN);
+    mymath::vec3 maxp(-FLT_MAX);
 
     for (auto &v : vertices) {
         minp = mymath::min(minp, v.position);
@@ -166,6 +165,65 @@ void Model::deduplicateVertices() {
     indices = std::move(newIndices);
 }
 
+void computeBounds(const std::vector<Vertex>& vertices, mymath::vec3 &minp, mymath::vec3 &maxp) {
+    if (vertices.empty()) {
+        minp = mymath::vec3(0.0f);
+        maxp = mymath::vec3(0.0f);
+        return;
+    }
+    minp = mymath::vec3(FLT_MAX);
+    maxp = mymath::vec3(-FLT_MAX);
+    for (const auto &v : vertices) {
+        minp = mymath::min(minp, v.position);
+        maxp = mymath::max(maxp, v.position);
+    }
+}
+
+void Model::generateAutoUVs() {
+    if (vertices.empty()) return;
+
+    mymath::vec3 minp, maxp;
+    computeBounds(vertices, minp, maxp);
+    mymath::vec3 ext = maxp - minp; // size of the bounding box
+
+    if (ext.x < mymath::EPS) ext.x = mymath::EPS;
+    if (ext.y < mymath::EPS) ext.y = mymath::EPS;
+    if (ext.z < mymath::EPS) ext.z = mymath::EPS;
+
+    for (auto &v : vertices) {
+        mymath::vec3 n = mymath::abs(v.normal);
+        float ax = n.x, ay = n.y, az = n.z;
+        if (ax + ay + az < 1e-6f) {
+            mymath::vec3 ap = mymath::abs(v.position);
+            ax = ap.x; ay = ap.y; az = ap.z;
+        }
+
+        mymath::vec2 uv(0.0f, 0.0f);
+
+        if (ax >= ay && ax >= az) {
+            // project onto YZ plane (using z -> u, y -> v)
+            uv.x = (v.position.z - minp.z) / ext.z;
+            uv.y = (v.position.y - minp.y) / ext.y;
+        } else if (ay >= ax && ay >= az) {
+            // project onto XZ plane (x -> u, z -> v)
+            uv.x = (v.position.x - minp.x) / ext.x;
+            uv.y = (v.position.z - minp.z) / ext.z;
+        } else {
+            // az largest -> project onto XY plane (x -> u, y -> v)
+            uv.x = (v.position.x - minp.x) / ext.x;
+            uv.y = (v.position.y - minp.y) / ext.y;
+        }
+        v.texCoord = uv;
+    }
+    this->hasUV = true;
+}
+
+void Model::loadTexture(const std::string &path) {
+    material.path = path;
+    material.hasTexture = true;
+    if (!this->hasUV) generateAutoUVs();
+}
+
 void Model::loadObject(const std::string &path) {
      std::ifstream file(path, std::ios::in);
     if(path.empty() || !file.is_open()) {
@@ -206,7 +264,6 @@ void Model::loadObject(const std::string &path) {
             while (stream >> token) {
                 try {
                     FaceIndex idx = parseFaceToken(token);
-                    // std::cout << "Parsing face token: " << token << "-> " << idx.v << ", " << idx.t << ", " << idx.n << std::endl; // Debug
                     Vertex vertex;
                     vertex.position = positions[idx.v];
                     vertex.texCoord = (idx.t >= 0 && idx.t < (int)texcoords.size()) ? texcoords[idx.t] : mymath::vec2(0.0f);
@@ -235,17 +292,16 @@ void Model::loadObject(const std::string &path) {
     deduplicateVertices();
     this->centerAndNormalize();
     file.close();
-
-    showInfo(*this);
 }
 
-void showInfo(const Model &model) {
-    std::cout << "--------------------------------" << std::endl
-              << "[Model Info]" << std::endl
-              << "  Loaded object: " << model.name << std::endl
-              << "  " << model.vertices.size() << " total vertices, " << model.indices.size() << " faces" << std::endl
-              << "  hasUV: " << (model.hasUV ? "true" : "false") << std::endl
-              << "--------------------------------" << std::endl
+void Model::showInfo() const {
+    std::cout << "-----------------------------------" << std::endl
+              << "[Object Info]" << std::endl
+              << "  Loaded object: " << this->name << std::endl
+              << "  " << this->vertices.size() << " total vertices, " << this->indices.size() << " faces" << std::endl
+              << "  hasUV: " << (this->hasUV ? "true" : "false") << std::endl
+              << "  Material: " << (this->material.hasTexture ? ("texture '" + this->material.path + "'") : "default color") << std::endl
+              << "-----------------------------------" << std::endl
               << std::endl;
 }
 
@@ -300,9 +356,4 @@ void mockup(Model &model) {
     model.name = "Opengl";
     model.vertices = vts;
     model.indices = idx;
-}
-
-void Model::loadTexture(const std::string &path) {
-    material.path = path;
-    material.hasTexture = true;
 }

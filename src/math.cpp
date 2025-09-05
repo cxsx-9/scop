@@ -29,6 +29,14 @@ namespace mymath {
         );
     }
 
+    mymath::vec3 abs(const mymath::vec3& v) {
+        return mymath::vec3(
+            std::fabs(v.x),
+            std::fabs(v.y),
+            std::fabs(v.z)
+        );
+    }
+
     float length(const vec3& v) { return std::sqrt(dot(v,v)); }
 
     vec3 normalize(const vec3& v) {
