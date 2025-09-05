@@ -1,6 +1,7 @@
 #include "model.hpp"
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
+#include "math.hpp"
 
 static void showInfo(const Model &model);
 
@@ -72,16 +73,16 @@ void Model::bind() const {
 void Model::centerAndNormalize(float targetExtent = 2.0f, float margin = 0.9f) {
     if (vertices.empty()) return;
 
-    glm::vec3 minp(FLT_MAX);
-    glm::vec3 maxp(-FLT_MAX);
+    mymath::vec3 minp(FLT_MAX);
+    mymath::vec3 maxp(FLT_MIN);
 
     for (auto &v : vertices) {
-        minp = glm::min(minp, v.position);
-        maxp = glm::max(maxp, v.position);
+        minp = mymath::min(minp, v.position);
+        maxp = mymath::max(maxp, v.position);
     }
 
-    glm::vec3 center = 0.5f * (minp + maxp);
-    glm::vec3 size   = maxp - minp;
+    mymath::vec3 center = (minp + maxp) * 0.5f;
+    mymath::vec3 size   = maxp - minp;
     float maxExtent  = std::max(size.x, std::max(size.y, size.z));
 
     float scale = (targetExtent / maxExtent) * margin;
@@ -91,7 +92,7 @@ void Model::centerAndNormalize(float targetExtent = 2.0f, float margin = 0.9f) {
     }
 
     for (auto &v : vertices) {
-        v.normal = glm::normalize(v.normal);
+        v.normal = mymath::normalize(v.normal);
     }
 }
 
@@ -128,16 +129,16 @@ void Model::computeNormals() {
         Vertex &v1 = this->vertices[this->indices[i + 1]];
         Vertex &v2 = this->vertices[this->indices[i + 2]];
 
-        glm::vec3 edge1 = v1.position - v0.position;
-        glm::vec3 edge2 = v2.position - v0.position;
-        glm::vec3 faceNormal = glm::normalize(glm::cross(edge1, edge2));
+        mymath::vec3 edge1 = v1.position - v0.position;
+        mymath::vec3 edge2 = v2.position - v0.position;
+        mymath::vec3 faceNormal = mymath::normalize(mymath::cross(edge1, edge2));
 
         v0.normal += faceNormal;
         v1.normal += faceNormal;
         v2.normal += faceNormal;
     }
     for (auto &v : this->vertices) {
-        v.normal = glm::normalize(v.normal);
+        v.normal = mymath::normalize(v.normal);
     }
 }
 
@@ -173,9 +174,9 @@ void Model::loadObject(const std::string &path) {
         return;
     }
 
-    std::vector<glm::vec3> positions;
-    std::vector<glm::vec2> texcoords;
-    std::vector<glm::vec3> normals;
+    std::vector<mymath::vec3> positions;
+    std::vector<mymath::vec2> texcoords;
+    std::vector<mymath::vec3> normals;
 
     std::string line;
     while (std::getline(file, line)) {
@@ -188,15 +189,15 @@ void Model::loadObject(const std::string &path) {
         if (prefix == "o") {
             stream >> this->name;
         } else if (prefix == "v") {
-            glm::vec3 pos;
+            mymath::vec3 pos;
             stream >> pos.x >> pos.y >> pos.z;
             positions.push_back(pos);
         } else if (prefix == "vt") {
-            glm::vec2 uv;
+            mymath::vec2 uv;
             stream >> uv.x >> uv.y;
             texcoords.push_back(uv);
         } else if (prefix == "vn") {
-            glm::vec3 norm;
+            mymath::vec3 norm;
             stream >> norm.x >> norm.y >> norm.z;
             normals.push_back(norm);
         } else if (prefix == "f") {
@@ -208,8 +209,8 @@ void Model::loadObject(const std::string &path) {
                     // std::cout << "Parsing face token: " << token << "-> " << idx.v << ", " << idx.t << ", " << idx.n << std::endl; // Debug
                     Vertex vertex;
                     vertex.position = positions[idx.v];
-                    vertex.texCoord = (idx.t >= 0 && idx.t < (int)texcoords.size()) ? texcoords[idx.t] : glm::vec2(0.0f);
-                    vertex.normal   = (idx.n >= 0 && idx.n < (int)normals.size()) ? normals[idx.n] : glm::vec3(0.0f);
+                    vertex.texCoord = (idx.t >= 0 && idx.t < (int)texcoords.size()) ? texcoords[idx.t] : mymath::vec2(0.0f);
+                    vertex.normal   = (idx.n >= 0 && idx.n < (int)normals.size()) ? normals[idx.n] : mymath::vec3(0.0f);
 
                     this->vertices.push_back(vertex);
                     faceIndices.push_back(static_cast<unsigned int>(this->vertices.size() - 1));

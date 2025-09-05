@@ -74,7 +74,7 @@ GLFWwindow* createWindow(const std::string &name)
     return window;
 }
 
-void display(GLFWwindow* window, Shader shader, Model model, glm::mat4& modelMatrix, Renderer renderer) {
+void display(GLFWwindow* window, Shader shader, Model model, mymath::mat4& modelMatrix, Renderer renderer) {
     float last = (float)glfwGetTime();
     while (!glfwWindowShouldClose(window)) {
         float now = (float)glfwGetTime();
@@ -88,8 +88,8 @@ void display(GLFWwindow* window, Shader shader, Model model, glm::mat4& modelMat
         int fbW, fbH;
         glfwGetFramebufferSize(window, &fbW, &fbH);
         float aspect = (fbH == 0) ? 1.0f : (float)fbW / (float)fbH;
-        glm::mat4 view = gInputManager->getCamera()->getViewMatrix();
-        glm::mat4 proj = gInputManager->getCamera()->getProjection(aspect);
+        mymath::mat4 view = gInputManager->getCamera()->getViewMatrix();
+        mymath::mat4 proj = gInputManager->getCamera()->getProjection(aspect);
 
         renderer.draw(model, shader, modelMatrix, view, proj);
         glfwSwapBuffers(window);
@@ -116,7 +116,7 @@ int main(int ac, char **av) {
     gInputManager = &inputManager;
 
     Renderer renderer(inputManager);
-    glm::mat4 modelMatrix(1.0f);
+    mymath::mat4 modelMatrix(1.0f);
 
     display(window, shader, model, modelMatrix, renderer);
     

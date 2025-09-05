@@ -6,8 +6,8 @@ InputManager::InputManager(Camera* camera, GLFWwindow* window) {
     mouseControl = false;
     moveMode = OBJECT;
     renderMode = MODE_GRAY;
-    position = glm::vec3(0.0f);
-    rotation = glm::mat4(1.0f);
+    position = mymath::vec3(0.0f);
+    rotation = mymath::mat4(1.0f);
     m_camera = camera;
     m_window = window;
     transitioning = false;
@@ -29,6 +29,7 @@ void InputManager::showHelp() const {
     << "  [1]     Shading Mode: Gray\n"
     << "  [2]     Shading Mode: Colorful\n"
     << "  [3]     Shading Mode: Texture\n"
+    << "  [0]     Switch Shading Mode\n"
     << "  [R]     Toggle Auto Rotation\n"
     << "  [T]     Toggle Wireframe\n"
     << "  [M]     Switch Mode (Camera/Object)\n"
@@ -66,7 +67,6 @@ void InputManager::handleKey(int key, int action) {
             moveMode = (moveMode == CAMERA) ? OBJECT : CAMERA;
             std::cout << "Move: " << (moveMode == CAMERA ? "Camera" : "Object") << std::endl;
         }
-        // using 1 2 3 for shading mode
         if (key == GLFW_KEY_1) {
             if (renderMode != MODE_GRAY) {
                 prevMode = renderMode;
@@ -94,6 +94,13 @@ void InputManager::handleKey(int key, int action) {
             }
             std::cout << "Shading Mode: Texture" << std::endl;
         }
+        if (key == GLFW_KEY_0) {
+            prevMode = renderMode;
+            renderMode = (renderMode == MODE_COLORFUL) ? MODE_TEXTURE : MODE_COLORFUL;
+            transitioning = true;
+            mixFactor = 0.0f;
+            std::cout << "Shading Mode: " << (renderMode == MODE_COLORFUL ? "Colorful" : "Texture") << std::endl;
+        }
     }
     glPolygonMode(GL_FRONT_AND_BACK, wireframe ? GL_LINE : GL_FILL);
 }
@@ -110,23 +117,23 @@ void InputManager::handleMouseButton(int button, int action) {
 }
 
 // process continuous input
-void InputManager::processInput(float dt, glm::mat4& model) {
+void InputManager::processInput(float dt, mymath::mat4& model) {
 
     // Object movement
     if (moveMode == OBJECT) {
         // WASDQE
         if (glfwGetKey(m_window, GLFW_KEY_W) == GLFW_PRESS)
-            position += glm::vec3(0, 0, -1) * dt;
+            position += mymath::vec3(0, 0, -1) * dt;
         if (glfwGetKey(m_window, GLFW_KEY_S) == GLFW_PRESS)
-            position += glm::vec3(0, 0, 1) * dt;
+            position += mymath::vec3(0, 0, 1) * dt;
         if (glfwGetKey(m_window, GLFW_KEY_A) == GLFW_PRESS)
-            position += glm::vec3(-1, 0, 0) * dt;
+            position += mymath::vec3(-1, 0, 0) * dt;
         if (glfwGetKey(m_window, GLFW_KEY_D) == GLFW_PRESS)
-            position += glm::vec3(1, 0, 0) * dt;
+            position += mymath::vec3(1, 0, 0) * dt;
         if (glfwGetKey(m_window, GLFW_KEY_Q) == GLFW_PRESS)
-            position += glm::vec3(0, 1, 0) * dt;
+            position += mymath::vec3(0, 1, 0) * dt;
         if (glfwGetKey(m_window, GLFW_KEY_E) == GLFW_PRESS)
-            position += glm::vec3(0, -1, 0) * dt;
+            position += mymath::vec3(0, -1, 0) * dt;
     }
 
     // Camera movement
@@ -168,17 +175,16 @@ void InputManager::processInput(float dt, glm::mat4& model) {
 
     // auto rotation
     if (rotate)
-        rotation = glm::rotate(rotation, dt * glm::radians(20.0f), glm::vec3(0, 1, 0));
+        rotation = mymath::rotate(rotation, dt * mymath::radians(20.0f), mymath::vec3(0, 1, 0));
     
-    model = glm::mat4(1.0f);
-    model = glm::translate(model, position);
+    model = mymath::mat4(1.0f);
+    model = mymath::translate(model, position);
     model *= rotation;
 
     if (transitioning) {
         float speed = 150.0f * dt;
         mixFactor += dt * speed;
         if (mixFactor >= 1.0f) {
-            std::cout << "Transition to " << (renderMode == MODE_GRAY ? "Gray" : (renderMode == MODE_COLORFUL ? "Colorful" : "Texture")) << " complete." << std::endl;
             mixFactor = 1.0f;
             transitioning = false;
         }

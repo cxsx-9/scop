@@ -4,20 +4,20 @@ Camera::Camera() : Position(0,0,5), WorldUp(0,1,0), Yaw(-90), Pitch(0), Fov(45),
 
 Camera::~Camera() {}
 
-glm::mat4 Camera::getViewMatrix() const {
-    glm::vec3 front{
-        cos(glm::radians(Yaw))*cos(glm::radians(Pitch)),
-        sin(glm::radians(Pitch)),
-        sin(glm::radians(Yaw))*cos(glm::radians(Pitch))
+mymath::mat4 Camera::getViewMatrix() const {
+    mymath::vec3 front{
+        cos(mymath::radians(Yaw))*cos(mymath::radians(Pitch)),
+        sin(mymath::radians(Pitch)),
+        sin(mymath::radians(Yaw))*cos(mymath::radians(Pitch))
     };
-    glm::vec3 Front = glm::normalize(front);
-    glm::vec3 Right = glm::normalize(glm::cross(Front, WorldUp));
-    glm::vec3 Up    = glm::normalize(glm::cross(Right, Front));
-    return glm::lookAt(Position, Position + Front, Up);
+    mymath::vec3 Front = mymath::normalize(front);
+    mymath::vec3 Right = mymath::normalize(mymath::cross(Front, WorldUp));
+    mymath::vec3 Up    = mymath::normalize(mymath::cross(Right, Front));
+    return mymath::lookAt(Position, Position + Front, Up);
 }
 
-glm::mat4 Camera::getProjection(float aspect, float nearP, float farP) const {
-    return glm::perspective(glm::radians(Fov), aspect, nearP, farP);
+mymath::mat4 Camera::getProjection(float aspect, float nearP, float farP) const {
+    return mymath::perspective(mymath::radians(Fov), aspect, nearP, farP);
 }
 
 void Camera::processMouse(float xpos, float ypos) {
@@ -46,14 +46,14 @@ void Camera::processScroll(float yoffset) {
 
 void Camera::processKeyboard(CameraMovement direction, float deltaTime) {
     float velocity = 2.5f * deltaTime;
-    glm::vec3 front {
-        cos(glm::radians(Yaw))*cos(glm::radians(Pitch)),
-        sin(glm::radians(Pitch)),
-        sin(glm::radians(Yaw))*cos(glm::radians(Pitch))
+    mymath::vec3 front {
+        cos(mymath::radians(Yaw))*cos(mymath::radians(Pitch)),
+        sin(mymath::radians(Pitch)),
+        sin(mymath::radians(Yaw))*cos(mymath::radians(Pitch))
     };
-    glm::vec3 Front = glm::normalize(front);
-    glm::vec3 flatFront = glm::normalize(glm::vec3(Front.x, 0.0f, Front.z));
-    glm::vec3 Right = glm::normalize(glm::cross(flatFront, WorldUp));
+    mymath::vec3 Front = mymath::normalize(front);
+    mymath::vec3 flatFront = mymath::normalize(mymath::vec3(Front.x, 0.0f, Front.z));
+    mymath::vec3 Right = mymath::normalize(mymath::cross(flatFront, WorldUp));
 
 
     if (direction == FORWARD)

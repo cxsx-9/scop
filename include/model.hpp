@@ -1,11 +1,12 @@
 #pragma once
 
 #include "scop.hpp"
+#include "math.hpp"
 
 struct Vertex {
-    glm::vec3 position;
-    glm::vec3 normal;
-    glm::vec2 texCoord;
+    mymath::vec3 position;
+    mymath::vec3 normal;
+    mymath::vec2 texCoord;
 
     bool operator==(const Vertex &other) const {
     return position == other.position &&
@@ -45,7 +46,7 @@ struct VertexEqual {
 struct Material {
     std::string path;
     GLuint diffuseMap = 0;
-    glm::vec3 diffuseColor = glm::vec3(0.8f);
+    mymath::vec3 diffuseColor = mymath::vec3(0.8f);
     bool hasTexture = false;
 };
 

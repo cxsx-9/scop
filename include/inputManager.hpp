@@ -25,8 +25,8 @@ class InputManager {
         bool mouseControl;
         MovementMode moveMode;
         RenderMode renderMode;
-        glm::vec3 position;
-        glm::mat4 rotation;
+        mymath::vec3 position;
+        mymath::mat4 rotation;
         float mixFactor;
         bool transitioning;
         int prevMode;
@@ -34,7 +34,7 @@ class InputManager {
         Camera* getCamera() const;
         void handleKey(int key, int action);
         void handleMouseButton(int button, int action);
-        void processInput(float dt, glm::mat4& model);
+        void processInput(float dt, mymath::mat4& model);
 
         void showStatus() const;
         void showHelp() const;

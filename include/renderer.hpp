@@ -20,9 +20,9 @@ public:
     }
 
     void draw(const Model& model, Shader& shader,
-              const glm::mat4& modelMatrix,
-              const glm::mat4& view,
-              const glm::mat4& proj)
+              const mymath::mat4& modelMatrix,
+              const mymath::mat4& view,
+              const mymath::mat4& proj)
     {
         shader.use();
         shader.setMat4("model", modelMatrix);

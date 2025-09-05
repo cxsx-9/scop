@@ -27,14 +27,13 @@ Shader::Shader(const char* vsPath, const char* fsPath) {
 }
 
 void Shader::use() const {
-     glUseProgram(ID); 
+    glUseProgram(ID); 
 }
 
-void Shader::setMat4(const std::string& name, const glm::mat4& m) const {
-    glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, glm::value_ptr(m));
-    // glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, m.value_ptr()); // for math.hpp
+void Shader::setMat4(const std::string& name, const mymath::mat4& m) const {
+    glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, m.data());
 }
-void Shader::setVec3(const std::string& name, const glm::vec3& v) const {
+void Shader::setVec3(const std::string& name, const mymath::vec3& v) const {
     glUniform3fv(glGetUniformLocation(ID, name.c_str()), 1, &v.x);
 }
 void Shader::setFloat(const std::string& name, float f) const {

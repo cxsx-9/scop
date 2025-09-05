@@ -1,7 +1,7 @@
 #pragma once
 
 #include "scop.hpp"
-// #include "math.hpp"
+#include "math.hpp"
 
 enum CameraMovement {
     FORWARD,
@@ -18,8 +18,8 @@ enum CameraMovement {
 
 class Camera {
 public:
-    glm::vec3 Position;
-    glm::vec3 WorldUp;
+    mymath::vec3 Position;
+    mymath::vec3 WorldUp;
     float Yaw;
     float Pitch;
     float Fov;
@@ -32,8 +32,8 @@ public:
     Camera();
     ~Camera();
 
-    glm::mat4 getViewMatrix() const;
-    glm::mat4 getProjection(float aspect, float nearP=0.1f, float farP=100.0f) const;
+    mymath::mat4 getViewMatrix() const;
+    mymath::mat4 getProjection(float aspect, float nearP=0.1f, float farP=100.0f) const;
 
     void processMouse(float xpos, float ypos);
     void processScroll(float yoffset);
