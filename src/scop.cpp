@@ -104,6 +104,7 @@ int main(int ac, char **av) {
 
     Model model;
     model.loadObject(av[1]);
+    if (ac == 3) model.loadTexture(av[2]);
 
     GLFWwindow* window = createWindow(model.name);
     
@@ -114,7 +115,7 @@ int main(int ac, char **av) {
     InputManager inputManager(camera, window);
     gInputManager = &inputManager;
 
-    Renderer renderer;
+    Renderer renderer(inputManager);
     glm::mat4 modelMatrix(1.0f);
 
     display(window, shader, model, modelMatrix, renderer);

@@ -43,14 +43,10 @@ struct VertexEqual {
 };
 
 struct Material {
-    std::string name;
-    glm::vec3 diffuseColor;
-    GLuint diffuseMap;
-
-    Material()
-        : name(""),
-          diffuseColor(1, 1, 1),
-          diffuseMap(0) {}
+    std::string path;
+    GLuint diffuseMap = 0;
+    glm::vec3 diffuseColor = glm::vec3(0.8f);
+    bool hasTexture = false;
 };
 
 struct FaceIndex {
@@ -73,6 +69,7 @@ class Model{
         void setup();
         void bind() const;
         void loadObject(const std::string &path);
+        void loadTexture(const std::string &path);
         void centerAndNormalize(float targetExtent, float margin);
         FaceIndex parseFaceToken(const std::string &token);
         void computeNormals();

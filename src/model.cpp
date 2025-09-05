@@ -1,4 +1,6 @@
 #include "model.hpp"
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 
 static void showInfo(const Model &model);
 
@@ -35,6 +37,32 @@ void Model::setup() {
     glEnableVertexAttribArray(2);
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const void*)offsetof(Vertex, texCoord));
     glBindVertexArray(0);
+
+    // setup material if has
+    if (!material.hasTexture) return;
+    int width, height, channels;
+    stbi_set_flip_vertically_on_load(true);
+    unsigned char *data = stbi_load(material.path.c_str(), &width, &height, &channels, 0);
+    if (!data) {
+        std::cerr << "[Error] Failed to load texture: " << material.path << std::endl;
+        return;
+    }
+
+    GLenum format = (channels == 1 ? GL_RED : (channels == 3 ? GL_RGB : GL_RGBA));
+
+    glGenTextures(1, &material.diffuseMap);
+    glBindTexture(GL_TEXTURE_2D, material.diffuseMap);
+
+    glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+    glGenerateMipmap(GL_TEXTURE_2D);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    stbi_image_free(data);
+    glBindTexture(GL_TEXTURE_2D, 0);
 };
 
 void Model::bind() const { 
@@ -211,12 +239,12 @@ void Model::loadObject(const std::string &path) {
 }
 
 void showInfo(const Model &model) {
-    std::cout << "-------------------------" << std::endl
+    std::cout << "--------------------------------" << std::endl
               << "[Model Info]" << std::endl
               << "  Loaded object: " << model.name << std::endl
               << "  " << model.vertices.size() << " total vertices, " << model.indices.size() << " faces" << std::endl
               << "  hasUV: " << (model.hasUV ? "true" : "false") << std::endl
-              << "-------------------------\n"
+              << "--------------------------------" << std::endl
               << std::endl;
 }
 
@@ -271,4 +299,9 @@ void mockup(Model &model) {
     model.name = "Opengl";
     model.vertices = vts;
     model.indices = idx;
+}
+
+void Model::loadTexture(const std::string &path) {
+    material.path = path;
+    material.hasTexture = true;
 }

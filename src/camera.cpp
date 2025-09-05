@@ -36,16 +36,12 @@ void Camera::processMouse(float xpos, float ypos) {
     Pitch += yoffset;
     if(Pitch > 89.0f) Pitch = 89.0f;
     if(Pitch < -89.0f) Pitch = -89.0f;
-
-    std::cout << "Yaw: " << Yaw << " Pitch: " << Pitch << std::endl;
 }
 
 void Camera::processScroll(float yoffset) {
     Fov -= yoffset;
     if(Fov < 1.0f) Fov = 1.0f;
     if(Fov > 90.0f) Fov = 90.0f;
-
-    std::cout << "Fov: " << Fov << std::endl;
 }
 
 void Camera::processKeyboard(CameraMovement direction, float deltaTime) {
