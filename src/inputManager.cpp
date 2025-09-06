@@ -12,6 +12,7 @@ InputManager::InputManager(Camera* camera, GLFWwindow* window) {
     m_window = window;
     transitioning = false;
     prevMode = renderMode;
+    rotationInput = ROTATE_Y_NEG;
 
     showHelp();
 }
@@ -32,6 +33,10 @@ void InputManager::showHelp() const {
     << "  [0]     Switch Shading Mode\n"
     << "  [R]     Toggle Auto Rotation\n"
     << "  [T]     Toggle Wireframe\n"
+    << "  [Z/X]   Rotate +Y/-Y\n"
+    << "  [C/V]   Rotate +X/-X\n"
+    << "  [B/N]   Rotate +Z/-Z\n"
+    << "  [L]     Rotate All Axes\n"
     << "  [M]     Switch Mode (Camera/Object)\n"
     << "  [H]     Help\n"
     << "  [I]     Status\n"
@@ -45,6 +50,13 @@ void InputManager::showStatus() const {
     std::cout << "  Wireframe: " << (wireframe ? "ON" : "OFF") << std::endl;
     std::cout << "  Shading Mode: " << (renderMode == MODE_GRAY ? "Gray" : (renderMode == MODE_COLORFUL ? "Colorful" : "Texture")) << std::endl;
     std::cout << "  Auto Rotation: " << (rotate ? "ON" : "OFF") << std::endl;
+    std::cout << "  Rotation Axis: " << (rotationInput == ROTATE_X_POS ? "+X" :
+                                      (rotationInput == ROTATE_X_NEG ? "-X" :
+                                      (rotationInput == ROTATE_Y_POS ? "+Y" :
+                                      (rotationInput == ROTATE_Y_NEG ? "-Y" :
+                                      (rotationInput == ROTATE_Z_POS ? "+Z" :
+                                      (rotationInput == ROTATE_Z_NEG ? "-Z" :
+                                      (rotationInput == ROTATE_ALL ? "All" : "None"))))))) << std::endl;
     std::cout << "  Mouse Control: " << (mouseControl ? "ON" : "OFF") << std::endl;
     std::cout << std::endl;
 }
@@ -100,6 +112,34 @@ void InputManager::handleKey(int key, int action) {
             transitioning = true;
             mixFactor = 0.0f;
             std::cout << "Shading Mode: " << (renderMode == MODE_COLORFUL ? "Colorful" : "Texture") << std::endl;
+        }
+        if (key == GLFW_KEY_Z) {
+            rotationInput = ROTATE_Y_POS;
+            std::cout << "Rotation axis: +Y" << std::endl;
+        }
+        if (key == GLFW_KEY_X) {
+            rotationInput = ROTATE_Y_NEG;
+            std::cout << "Rotation axis: -Y" << std::endl;
+        }
+        if (key == GLFW_KEY_C) {
+            rotationInput = ROTATE_X_POS;
+            std::cout << "Rotation axis: +X" << std::endl;
+        }
+        if (key == GLFW_KEY_V) {
+            rotationInput = ROTATE_X_NEG;
+            std::cout << "Rotation axis: -X" << std::endl;
+        }
+        if (key == GLFW_KEY_B) {
+            rotationInput = ROTATE_Z_POS;
+            std::cout << "Rotation axis: +Z" << std::endl;
+        }
+        if (key == GLFW_KEY_N) {
+            rotationInput = ROTATE_Z_NEG;
+            std::cout << "Rotation axis: -Z" << std::endl;
+        }
+        if (key == GLFW_KEY_L) {
+            rotationInput = ROTATE_ALL;
+            std::cout << "Rotation axis: All" << std::endl;
         }
     }
     glPolygonMode(GL_FRONT_AND_BACK, wireframe ? GL_LINE : GL_FILL);
@@ -174,8 +214,38 @@ void InputManager::processInput(float dt, mymath::mat4& model) {
     }
 
     // auto rotation
+
+    mymath::vec3 rotationAxis;
+
+    switch (rotationInput) {
+        case ROTATE_X_POS:
+            rotationAxis = mymath::vec3(1, 0, 0);
+            break;
+        case ROTATE_X_NEG:
+            rotationAxis = mymath::vec3(-1, 0, 0);
+            break;
+        case ROTATE_Y_POS:
+            rotationAxis = mymath::vec3(0, 1, 0);
+            break;
+        case ROTATE_Y_NEG:
+            rotationAxis = mymath::vec3(0, -1, 0);
+            break;
+        case ROTATE_Z_POS:
+            rotationAxis = mymath::vec3(0, 0, 1);
+            break;
+        case ROTATE_Z_NEG:
+            rotationAxis = mymath::vec3(0, 0, -1);  
+            break;
+        case ROTATE_ALL:
+            rotationAxis = mymath::vec3(1, 1, 1);
+            break;
+        default:
+            rotationAxis = mymath::vec3(1, 1, 1);
+            break;
+    }
+
     if (rotate)
-        rotation = mymath::rotate(rotation, dt * mymath::radians(20.0f), mymath::vec3(0, 1, 0));
+        rotation = mymath::rotate(rotation, dt * mymath::radians(20.0f), rotationAxis);
     
     model = mymath::mat4(1.0f);
     model = mymath::translate(model, position);

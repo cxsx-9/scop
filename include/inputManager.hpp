@@ -16,6 +16,17 @@ enum RenderMode {
     MODE_TEXTURE = 3
 };
 
+enum RotationInput {
+    ROTATE_X_POS,
+    ROTATE_X_NEG,
+    ROTATE_Y_POS,
+    ROTATE_Y_NEG,
+    ROTATE_Z_POS,
+    ROTATE_Z_NEG,
+    ROTATE_ALL,
+    NONE
+};
+
 class InputManager {
     public:
         InputManager(Camera* camera, GLFWwindow* window);
@@ -30,6 +41,7 @@ class InputManager {
         float mixFactor;
         bool transitioning;
         int prevMode;
+        RotationInput rotationInput;
 
         Camera* getCamera() const;
         void handleKey(int key, int action);
