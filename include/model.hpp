@@ -4,9 +4,9 @@
 #include "math.hpp"
 
 struct Vertex {
-    mymath::vec3 position;
-    mymath::vec3 normal;
-    mymath::vec2 texCoord;
+    mymath::vec3 position = mymath::vec3(0.0f);
+    mymath::vec3 normal = mymath::vec3(0.0f);
+    mymath::vec2 texCoord = mymath::vec2(0.0f);
 
     bool operator==(const Vertex &other) const {
     return position == other.position &&
@@ -46,7 +46,6 @@ struct VertexEqual {
 struct Material {
     std::string path;
     GLuint textureID = 0;
-    mymath::vec3 diffuseColor = mymath::vec3(0.8f);
     bool hasTexture = false;
 };
 

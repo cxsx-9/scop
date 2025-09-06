@@ -19,7 +19,6 @@ int checkFileAccessibility(const std::string &path) {
 
 int checkExtension(const std::string &filename, const std::string &extension) {
     if (filename.length() < extension.length() || filename.substr(filename.length() - extension.length()) != extension) {
-        std::cerr << "[Error] Invalid file extension. Expected " << extension << std::endl;
         return -1;
     }
     std::cout << "[Info] File extension " << extension << " verified." << std::endl;

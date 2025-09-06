@@ -1,6 +1,6 @@
 NAME = scop
 
-CXX = g++ -g -fsanitize=address
+CXX = g++ #-g -fsanitize=address
 CC = gcc
 CXXFLAGS = -Wall -Wextra -Werror -I./include
 CFLAGS = -Wall -Wextra -Werror -I./include
