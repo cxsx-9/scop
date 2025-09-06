@@ -31,7 +31,7 @@ public:
 
         if (model.material.hasTexture) {
             glActiveTexture(GL_TEXTURE0);
-            glBindTexture(GL_TEXTURE_2D, model.material.diffuseMap);
+            glBindTexture(GL_TEXTURE_2D, model.material.textureID);
             shader.setInt("diffuseMap", 0);
         }
         shader.setInt("renderMode", inputManager.renderMode);

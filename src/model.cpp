@@ -2,6 +2,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 #include "math.hpp"
+#include <unordered_map>
 
 Model::Model() {};
 
@@ -9,6 +10,9 @@ Model::~Model() {
     if (EBO) glDeleteBuffers(1,&EBO);
     if (VBO) glDeleteBuffers(1,&VBO);
     if (VAO) glDeleteVertexArrays(1,&VAO);
+    if (material.hasTexture && material.textureID) {
+        glDeleteTextures(1, &material.textureID);
+    }
 };
 
 void Model::setup() {
@@ -50,8 +54,8 @@ void Model::setup() {
 
     GLenum format = (channels == 1 ? GL_RED : (channels == 3 ? GL_RGB : GL_RGBA));
 
-    glGenTextures(1, &material.diffuseMap);
-    glBindTexture(GL_TEXTURE_2D, material.diffuseMap);
+    glGenTextures(1, &material.textureID);
+    glBindTexture(GL_TEXTURE_2D, material.textureID);
 
     glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
     glGenerateMipmap(GL_TEXTURE_2D);

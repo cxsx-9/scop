@@ -6,9 +6,9 @@ Camera::~Camera() {}
 
 mymath::mat4 Camera::getViewMatrix() const {
     mymath::vec3 front{
-        cos(mymath::radians(Yaw))*cos(mymath::radians(Pitch)),
-        sin(mymath::radians(Pitch)),
-        sin(mymath::radians(Yaw))*cos(mymath::radians(Pitch))
+        static_cast<float>(cos(mymath::radians(Yaw))*cos(mymath::radians(Pitch))),
+        static_cast<float>(sin(mymath::radians(Pitch))),
+        static_cast<float>(sin(mymath::radians(Yaw))*cos(mymath::radians(Pitch)))
     };
     mymath::vec3 Front = mymath::normalize(front);
     mymath::vec3 Right = mymath::normalize(mymath::cross(Front, WorldUp));
@@ -47,9 +47,9 @@ void Camera::processScroll(float yoffset) {
 void Camera::processKeyboard(CameraMovement direction, float deltaTime) {
     float velocity = 2.5f * deltaTime;
     mymath::vec3 front {
-        cos(mymath::radians(Yaw))*cos(mymath::radians(Pitch)),
-        sin(mymath::radians(Pitch)),
-        sin(mymath::radians(Yaw))*cos(mymath::radians(Pitch))
+        static_cast<float>(cos(mymath::radians(Yaw))*cos(mymath::radians(Pitch))),
+        static_cast<float>(sin(mymath::radians(Pitch))),
+        static_cast<float>(sin(mymath::radians(Yaw))*cos(mymath::radians(Pitch)))
     };
     mymath::vec3 Front = mymath::normalize(front);
     mymath::vec3 flatFront = mymath::normalize(mymath::vec3(Front.x, 0.0f, Front.z));

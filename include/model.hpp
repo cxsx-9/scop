@@ -45,7 +45,7 @@ struct VertexEqual {
 
 struct Material {
     std::string path;
-    GLuint diffuseMap = 0;
+    GLuint textureID = 0;
     mymath::vec3 diffuseColor = mymath::vec3(0.8f);
     bool hasTexture = false;
 };

@@ -94,6 +94,7 @@ void display(GLFWwindow* window, Shader& shader, Model& model, mymath::mat4& mod
         renderer.draw(model, shader, modelMatrix, view, proj);
         glfwSwapBuffers(window);
     }
+    glfwDestroyWindow(window);
     glfwTerminate();
 }
 
@@ -111,14 +112,14 @@ int main(int ac, char **av) {
     model.setup();
     Shader shader("src/shaders/vertexShader.glsl", "src/shaders/fragmentShader.glsl");
 
-    Camera* camera = new Camera();
-    InputManager inputManager(camera, window);
+    Camera camera;
+    InputManager inputManager(&camera, window);
     gInputManager = &inputManager;
 
     Renderer renderer(inputManager);
     mymath::mat4 modelMatrix(1.0f);
 
     display(window, shader, model, modelMatrix, renderer);
-    
+   
     return 0;
 }

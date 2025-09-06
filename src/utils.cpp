@@ -17,6 +17,15 @@ int checkFileAccessibility(const std::string &path) {
     return 0;
 }
 
+int checkExtension(const std::string &filename, const std::string &extension) {
+    if (filename.length() < extension.length() || filename.substr(filename.length() - extension.length()) != extension) {
+        std::cerr << "[Error] Invalid file extension. Expected " << extension << std::endl;
+        return -1;
+    }
+    std::cout << "[Info] File extension " << extension << " verified." << std::endl;
+    return 0;
+}
+
 void inputValidator(int ac, char **av){
     (void) av;
     if (ac < 2 || ac > 3) {
@@ -29,7 +38,7 @@ void inputValidator(int ac, char **av){
         std::cout << "[Debug]: using mock object" << std::endl;
         return;
     }
-    if ((objPath.length() >= 4 && objPath.substr(objPath.length() - 4) != ".obj") || checkFileAccessibility(objPath) != 0) {
+    if (checkExtension(objPath, ".obj") || checkFileAccessibility(objPath)) {
         std::cerr << "[Error] Invalid object file : " << objPath << std::endl;
         exit(1);
     }
@@ -37,7 +46,10 @@ void inputValidator(int ac, char **av){
 
 int textureValidator(char *path){
     std::string texPath = path;
-    if ((texPath.length() >= 4 && (texPath.substr(texPath.length() - 4) != ".png" && texPath.substr(texPath.length() - 4) != ".jpg")) || checkFileAccessibility(texPath) != 0) {
+    if (((checkExtension(texPath, ".png")
+        && checkExtension(texPath, ".jpg")
+        && checkExtension(texPath, ".jpeg"))
+        || checkFileAccessibility(texPath))) {
         std::cerr << "[Error] Invalid texture file : " << texPath << std::endl << "Continue without texture." << std::endl;
         return -1;
     }
